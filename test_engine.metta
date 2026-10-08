@@ -1,0 +1,20 @@
+; dev engine test (not a deliverable)
+!(import! &self stv)
+!(import! &self rules)
+!(import! &self kb)
+!(import! &self forward)
+!(import! &self backward)
+
+!(println! "=== FORWARD (3 rounds, cap 120) ===")
+!(let $fwd (forward (kb) 1 3 120)
+      (println! ("store size after:" (length $fwd))))
+
+!(println! "=== BACKWARD: should plot1 get neem oil? ===")
+!(let $cands (answer-in (kb) (Inheritance plot1 (IntSet treat-neem-oil)))
+      (progn (show-items $cands "candidate:")
+             (println! ("BEST" (best-of $cands)))))
+
+!(println! "=== BACKWARD: should plot2 get neem oil? ===")
+!(let $cands (answer-in (kb) (Inheritance plot2 (IntSet treat-neem-oil)))
+      (progn (show-items $cands "candidate:")
+             (println! ("BEST" (best-of $cands)))))
